@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 
 const isDropdownOpen = ref(false)
 const isScrolled = ref(false)
+const isMobileMenuOpen = ref(false)
+const isMobileProductsOpen = ref(false)
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
@@ -13,16 +15,38 @@ const closeDropdown = () => {
   isDropdownOpen.value = false
 }
 
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+  isMobileProductsOpen.value = false
+}
+
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20
 }
 
+const handleResize = () => {
+  if (window.innerWidth > 768) {
+    closeMobileMenu()
+  }
+}
+
+watch(isMobileMenuOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', handleResize)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -30,7 +54,7 @@ onUnmounted(() => {
   <header :class="['header', { 'header-scrolled': isScrolled }]">
     <div class="container header-container">
       <!-- Logo -->
-      <router-link to="/" class="logo-link" @click="closeDropdown">
+      <router-link to="/" class="logo-link" @click="closeMobileMenu">
         <div class="logo-wrapper">
           <img src="/logo.png" alt="DefineStack Logo" class="logo-img" />
           <div class="logo-text-container">
@@ -40,7 +64,7 @@ onUnmounted(() => {
         </div>
       </router-link>
 
-      <!-- Mobile Menu Toggle Button (Optional, let's make it fully responsive) -->
+      <!-- Desktop Nav -->
       <nav class="nav-menu">
         <div 
           class="nav-item has-dropdown"
@@ -78,6 +102,58 @@ onUnmounted(() => {
       <!-- CTA -->
       <div class="header-cta">
         <BaseButton to="/contact" variant="primary">Let's Connect</BaseButton>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        type="button"
+        :class="['mobile-menu-toggle', { 'is-open': isMobileMenuOpen }]"
+        aria-label="Toggle menu"
+        :aria-expanded="isMobileMenuOpen"
+        @click="toggleMobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Panel -->
+    <div :class="['mobile-nav', { 'is-open': isMobileMenuOpen }]">
+      <div class="mobile-nav-inner">
+        <div class="mobile-nav-group">
+          <button
+            type="button"
+            class="mobile-nav-link mobile-products-toggle"
+            :aria-expanded="isMobileProductsOpen"
+            @click="isMobileProductsOpen = !isMobileProductsOpen"
+          >
+            Products
+            <svg
+              :class="['chevron', { 'is-open': isMobileProductsOpen }]"
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div v-show="isMobileProductsOpen" class="mobile-products-panel">
+            <router-link to="/products" class="mobile-sub-link" @click="closeMobileMenu">All Products</router-link>
+            <router-link to="#" class="mobile-sub-link" @click="closeMobileMenu">StickyDo</router-link>
+            <router-link to="#" class="mobile-sub-link" @click="closeMobileMenu">Warranty Tracker</router-link>
+          </div>
+        </div>
+
+        <router-link to="/about" class="mobile-nav-link" @click="closeMobileMenu">About</router-link>
+        <router-link to="/contact" class="mobile-nav-link" @click="closeMobileMenu">Contact</router-link>
+
+        <BaseButton to="/contact" variant="primary" class="mobile-cta" @click="closeMobileMenu">
+          Let's Connect
+        </BaseButton>
       </div>
     </div>
   </header>
@@ -257,9 +333,117 @@ onUnmounted(() => {
   margin: var(--space-xs) 0;
 }
 
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-dark);
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.mobile-menu-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-nav {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none; /* In a real production app we'd add a hamburger menu, but for now we keep it clean or just stack */
+  .nav-menu,
+  .header-cta {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .mobile-nav {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+
+  .mobile-nav.is-open {
+    display: block;
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-sm) var(--space-lg) var(--space-xl);
+    gap: var(--space-xs);
+  }
+
+  .mobile-nav-link {
+    width: 100%;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-text);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-products-toggle .chevron {
+    transition: transform var(--transition-fast);
+  }
+
+  .mobile-products-toggle .chevron.is-open {
+    transform: rotate(180deg);
+  }
+
+  .mobile-products-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-md);
+  }
+
+  .mobile-sub-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    padding: var(--space-xs) 0;
+  }
+
+  .mobile-cta {
+    margin-top: var(--space-md);
+    width: 100%;
   }
 }
 </style>

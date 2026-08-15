@@ -124,11 +124,17 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   align-items: center;
   justify-content: center;
   font-family: 'Inter', sans-serif;
-  transform: scale(1.1);
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .logo-text-graphic {
+    transform: scale(1.1);
+  }
 }
 
 .logo-text-main {
-  font-size: 5.5rem;
+  font-size: clamp(2.25rem, 11vw, 5.5rem);
   font-weight: 800;
   color: #0f172a;
   letter-spacing: -2.5px;
@@ -142,13 +148,13 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 }
 
 .logo-text-sub {
-  font-size: 1.35rem;
+  font-size: clamp(0.65rem, 2.8vw, 1.35rem);
   font-weight: 600;
   color: #0f172a;
-  letter-spacing: 12px;
+  letter-spacing: clamp(4px, 2vw, 12px);
   margin-top: 1rem;
   text-transform: uppercase;
-  margin-left: 12px; /* Offset to center due to trailing letter-spacing */
+  margin-left: clamp(4px, 2vw, 12px); /* Offset to center due to trailing letter-spacing */
   white-space: nowrap;
 }
 
