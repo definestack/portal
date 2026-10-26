@@ -22,8 +22,16 @@ import BaseButton from '@/components/ui/BaseButton.vue'
         >
           <div class="product-layout">
             <div class="product-visual flex-center">
+              <!-- App icon image, when the product has one -->
+              <img
+                v-if="product.iconImage"
+                :src="product.iconImage"
+                :alt="`${product.title} app icon`"
+                class="product-icon-img"
+              />
+
               <!-- StickyDo Visual -->
-              <div v-if="product.iconType === 'stickynotes'" class="icon-3d-sticky">
+              <div v-else-if="product.iconType === 'stickynotes'" class="icon-3d-sticky">
                 <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <!-- Bottom note -->
                   <rect x="15" y="25" width="60" height="60" rx="8" fill="#bae6fd" transform="rotate(-6 45 55)" />
@@ -41,7 +49,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
                 </svg>
               </div>
 
-              <!-- Warranty Tracker Visual -->
+              <!-- Warranty Store Visual -->
               <div v-else-if="product.iconType === 'shield'" class="icon-3d-shield">
                 <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <!-- Shield outer -->
@@ -134,6 +142,13 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   border-radius: var(--radius-md);
   background-color: var(--color-light);
   border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.product-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product-info {

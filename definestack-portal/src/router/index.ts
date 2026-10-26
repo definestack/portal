@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'contact',
       component: () => import('@/views/ContactView.vue'),
     },
+    {
+      path: '/apps/warrantystore/privacypolicy',
+      name: 'warranty-store-privacy-policy',
+      component: () => import('@/views/WarrantyStorePrivacyPolicyView.vue'),
+    },
   ],
 })
 
