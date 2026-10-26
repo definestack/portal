@@ -30,8 +30,16 @@ import BaseButton from '@/components/ui/BaseButton.vue'
             <BaseCard class="row-card" padding="lg">
               <div class="row-layout">
                 <div class="row-visual flex-center">
+                  <!-- App icon image, when the product has one -->
+                  <img
+                    v-if="product.iconImage"
+                    :src="product.iconImage"
+                    :alt="`${product.title} app icon`"
+                    class="row-icon-img"
+                  />
+
                   <!-- StickyDo Visual -->
-                  <div v-if="product.iconType === 'stickynotes'" class="icon-3d-wrapper">
+                  <div v-else-if="product.iconType === 'stickynotes'" class="icon-3d-wrapper">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect x="15" y="25" width="60" height="60" rx="8" fill="#bae6fd" transform="rotate(-6 45 55)" />
                       <rect x="20" y="20" width="60" height="60" rx="8" fill="#7dd3fc" transform="rotate(-3 50 50)" />
@@ -44,7 +52,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
                     </svg>
                   </div>
 
-                  <!-- Warranty Tracker Visual -->
+                  <!-- Warranty Store Visual -->
                   <div v-else-if="product.iconType === 'shield'" class="icon-3d-wrapper">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M50 15C50 15 80 20 80 45C80 70 50 85 50 85C50 85 20 70 20 45C20 20 50 15 50 15Z" fill="#ffedd5" stroke="#f59e0b" stroke-width="4" stroke-linejoin="round" />
@@ -62,26 +70,33 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 
                   <h2 class="product-title">{{ product.title }}</h2>
                   <p class="product-desc">{{ product.description }}</p>
-                  
+
                   <div class="features-list">
-                    <div class="feature-item">
+                    <div
+                      v-for="feature in product.features ?? [
+                        'Designed for high performance and speed',
+                        'Privacy-first architecture with local sync',
+                        'Polished user experience with interactive states'
+                      ]"
+                      :key="feature"
+                      class="feature-item"
+                    >
                       <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
-                      <span>Designed for high performance and speed</span>
+                      <span>{{ feature }}</span>
                     </div>
-                    <div class="feature-item">
-                      <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      <span>Privacy-first architecture with local sync</span>
-                    </div>
-                    <div class="feature-item">
-                      <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      <span>Polished user experience with interactive states</span>
-                    </div>
+                  </div>
+
+                  <div v-if="product.screenshots?.length" class="screenshots-strip">
+                    <img
+                      v-for="(screenshot, index) in product.screenshots"
+                      :key="screenshot"
+                      :src="screenshot"
+                      :alt="`${product.title} screenshot ${index + 1}`"
+                      class="screenshot-thumb"
+                      loading="lazy"
+                    />
                   </div>
 
                   <div class="row-action">
@@ -91,6 +106,9 @@ import BaseButton from '@/components/ui/BaseButton.vue'
                     <BaseButton v-else to="/contact" variant="secondary">
                       Get Notified
                     </BaseButton>
+                    <router-link v-if="product.privacyPolicyUrl" :to="product.privacyPolicyUrl" class="privacy-policy-link">
+                      Privacy Policy
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -166,6 +184,13 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   background-color: var(--color-light);
   border: 1px solid var(--color-border);
   box-shadow: inset 0 2px 8px rgba(15, 23, 42, 0.02);
+  overflow: hidden;
+}
+
+.row-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .row-info {
@@ -228,7 +253,38 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   flex-shrink: 0;
 }
 
+.screenshots-strip {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.screenshot-thumb {
+  flex-shrink: 0;
+  height: 220px;
+  width: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
 .row-action {
   margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.privacy-policy-link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
+
+.privacy-policy-link:hover {
+  color: var(--color-primary);
 }
 </style>

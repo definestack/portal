@@ -33,12 +33,27 @@ export const productsData: Product[] = [
     linkUrl: '#'
   },
   {
-    id: 'warranty-tracker',
-    title: 'Warranty Tracker',
-    description: 'Track warranties, set reminders before expiry and store important documents securely.',
+    id: 'warranty-store',
+    title: 'Warranty Store',
+    description:
+      'Track product warranties and invoice receipts, fully offline, with reminders before cover runs out.',
     category: 'Mobile App',
     iconType: 'shield',
-    status: 'Coming Soon'
+    iconImage: '/warranty-store/app-icon.png',
+    features: [
+      'Warranty and extended warranty tracking, with expiry calculated automatically',
+      'Invoice and document storage attached to every item',
+      'Fully offline and private — no account, no cloud, no analytics'
+    ],
+    screenshots: [
+      '/warranty-store/screenshot-01-home.png',
+      '/warranty-store/screenshot-02-products.png',
+      '/warranty-store/screenshot-03-item-detail.png',
+      '/warranty-store/screenshot-04-settings.png',
+      '/warranty-store/screenshot-05-home-dark.png'
+    ],
+    status: 'Coming Soon',
+    privacyPolicyUrl: '/apps/warrantystore/privacypolicy'
   }
 ]
 
