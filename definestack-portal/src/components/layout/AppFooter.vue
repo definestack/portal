@@ -20,7 +20,7 @@
           <h4 class="col-title">Products</h4>
           <ul class="links-list">
             <li><router-link to="#" class="footer-link">StickyDo</router-link></li>
-            <li><router-link to="#" class="footer-link">Warranty Tracker</router-link></li>
+            <li><router-link to="#" class="footer-link">Warranty Store</router-link></li>
             <li><router-link to="/products" class="footer-link">All Products</router-link></li>
           </ul>
         </div>

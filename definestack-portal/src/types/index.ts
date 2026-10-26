@@ -4,9 +4,13 @@ export interface Product {
   description: string
   category: string
   iconType: 'stickynotes' | 'shield' | 'generic'
+  iconImage?: string
+  features?: string[]
+  screenshots?: string[]
   status?: 'Coming Soon' | 'Active'
   linkText?: string
   linkUrl?: string
+  privacyPolicyUrl?: string
 }
 
 export interface BlogPost {
