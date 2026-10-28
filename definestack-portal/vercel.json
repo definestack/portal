@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/apps/warrantystore/privacypolicy",
+      "destination": "/apps/warrantystore/privacypolicy/index.html"
+    }
+  ]
+}
