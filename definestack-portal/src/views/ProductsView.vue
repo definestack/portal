@@ -106,9 +106,9 @@ import BaseButton from '@/components/ui/BaseButton.vue'
                     <BaseButton v-else to="/contact" variant="secondary">
                       Get Notified
                     </BaseButton>
-                    <router-link v-if="product.privacyPolicyUrl" :to="product.privacyPolicyUrl" class="privacy-policy-link">
+                    <a v-if="product.privacyPolicyUrl" :href="product.privacyPolicyUrl" class="privacy-policy-link">
                       Privacy Policy
-                    </router-link>
+                    </a>
                   </div>
                 </div>
               </div>
