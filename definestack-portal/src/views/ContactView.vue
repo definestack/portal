@@ -119,7 +119,7 @@ const handleSubmit = () => {
                 </div>
                 <div class="info-text">
                   <div class="info-label">Email Us</div>
-                  <a href="mailto:hello@definestack.com" class="info-value">hello@definestack.com</a>
+                  <a href="mailto:definestack@gmail.com" class="info-value">definestack@gmail.com</a>
                 </div>
               </div>
 
@@ -131,7 +131,7 @@ const handleSubmit = () => {
                 </div>
                 <div class="info-text">
                   <div class="info-label">GitHub</div>
-                  <a href="https://github.com" target="_blank" rel="noopener" class="info-value">github.com/definestack</a>
+                  <a href="http://github.com/definestack" target="_blank" rel="noopener" class="info-value">github.com/definestack</a>
                 </div>
               </div>
             </div>
