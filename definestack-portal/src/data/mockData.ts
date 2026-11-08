@@ -23,17 +23,6 @@ export const featuresData: Feature[] = [
 
 export const productsData: Product[] = [
   {
-    id: 'stickydo',
-    title: 'StickyDo',
-    description:
-      'Smart sticky notes to capture ideas, manage to-dos, and keep reminders right at your fingertips.',
-    category: 'Desktop App',
-    iconType: 'stickynotes',
-    status: 'Active',
-    linkUrl: 'https://apps.microsoft.com/detail/9nzgmrpj9fj2?hl=en-US&gl=IN',
-    msStoreProductId: '9nzgmrpj9fj2'
-  },
-  {
     id: 'warranty-store',
     title: 'Warranty Store',
     description:
@@ -56,6 +45,17 @@ export const productsData: Product[] = [
     status: 'Active',
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=in.definestack.warrantystore&hl=en',
     privacyPolicyUrl: '/apps/warrantystore/privacypolicy'
+  },
+  {
+    id: 'stickydo',
+    title: 'StickyDo',
+    description:
+      'Smart sticky notes to capture ideas, manage to-dos, and keep reminders right at your fingertips.',
+    category: 'Desktop App',
+    iconType: 'stickynotes',
+    status: 'Active',
+    linkUrl: 'https://apps.microsoft.com/detail/9nzgmrpj9fj2?hl=en-US&gl=IN',
+    msStoreProductId: '9nzgmrpj9fj2'
   }
 ]
 
