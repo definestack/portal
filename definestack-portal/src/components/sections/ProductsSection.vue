@@ -78,8 +78,8 @@ import BaseButton from '@/components/ui/BaseButton.vue'
               <p class="product-desc">{{ product.description }}</p>
 
               <div class="product-action">
-                <BaseButton v-if="product.status === 'Active'" :to="product.linkUrl" variant="text">
-                  {{ product.linkText }}
+                <BaseButton v-if="product.status === 'Active'" :to="`/products#${product.id}`" variant="text">
+                  Learn More
                 </BaseButton>
                 <span v-else class="coming-soon-placeholder">Launching soon on iOS & Android</span>
               </div>
