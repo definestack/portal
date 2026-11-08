@@ -23,9 +23,11 @@ import { processStepsData } from '@/data/mockData'
             <div class="step-num-container flex-center">
               <div class="step-number flex-center">{{ step.stepNumber }}</div>
             </div>
-            
-            <h3 class="step-title">{{ step.title }}</h3>
-            <p class="step-desc">{{ step.description }}</p>
+
+            <div class="step-content">
+              <h3 class="step-title">{{ step.title }}</h3>
+              <p class="step-desc">{{ step.description }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -122,11 +124,33 @@ import { processStepsData } from '@/data/mockData'
 
 /* Vertical line for mobile */
 @media (max-width: 767px) {
+  .step-item {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--space-md);
+  }
+
+  .step-num-container {
+    flex-shrink: 0;
+    width: 58px;
+    margin-bottom: 0;
+  }
+
+  .step-content {
+    flex: 1;
+    padding-top: var(--space-xs);
+  }
+
+  .step-desc {
+    max-width: none;
+  }
+
   .step-item:not(:last-child)::after {
     content: '';
     position: absolute;
     top: 50px;
-    left: 50%;
+    left: 29px;
     width: 2px;
     height: calc(100% + var(--space-md));
     background-image: linear-gradient(to bottom, var(--color-primary) 50%, transparent 50%);
