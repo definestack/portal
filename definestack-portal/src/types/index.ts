@@ -10,6 +10,8 @@ export interface Product {
   status?: 'Coming Soon' | 'Active'
   linkText?: string
   linkUrl?: string
+  msStoreProductId?: string
+  googlePlayUrl?: string
   privacyPolicyUrl?: string
 }
 
