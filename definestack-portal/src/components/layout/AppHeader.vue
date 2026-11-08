@@ -189,7 +189,8 @@ onUnmounted(() => {
 }
 
 .nav-link:hover,
-.router-link-active {
+.nav-link.router-link-active,
+.mobile-nav-link.router-link-active {
   color: var(--color-primary);
 }
 

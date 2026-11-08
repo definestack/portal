@@ -38,7 +38,7 @@
           <h4 class="col-title">Resources</h4>
           <ul class="links-list">
             <li><router-link to="/" class="footer-link">Blog</router-link></li>
-            <li><a href="https://github.com" target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="http://github.com/definestack" target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
           </ul>
         </div>
       </div>

@@ -33,7 +33,7 @@ import BaseCard from '@/components/ui/BaseCard.vue'
             <BaseCard padding="lg" :hoverLift="false">
               <div class="stats-grid">
                 <div class="stat-item">
-                  <div class="stat-number">3+</div>
+                  <div class="stat-number">2</div>
                   <div class="stat-label">Products Maintained</div>
                 </div>
                 <div class="stat-item">
@@ -41,8 +41,8 @@ import BaseCard from '@/components/ui/BaseCard.vue'
                   <div class="stat-label">Uptime Architecture</div>
                 </div>
                 <div class="stat-item">
-                  <div class="stat-number">100%</div>
-                  <div class="stat-label">TypeScript & Type-Safe</div>
+                  <div class="stat-number">&lt;24h</div>
+                  <div class="stat-label">Support Response Time</div>
                 </div>
               </div>
             </BaseCard>
@@ -199,7 +199,7 @@ import BaseCard from '@/components/ui/BaseCard.vue'
 .approach-number {
   font-size: var(--font-size-3xl);
   font-weight: 800;
-  color: rgba(255, 92, 31, 0.15);
+  color: var(--color-primary);
   margin-bottom: var(--space-md);
 }
 

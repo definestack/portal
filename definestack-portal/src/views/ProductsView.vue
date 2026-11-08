@@ -12,7 +12,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
       <div class="container text-center">
         <span class="section-tag">Our Products</span>
         <h1 class="page-title">Thoughtfully built software</h1>
-        <p class="page-desc centered">
+        <p class="page-desc">
           We design, develop and maintain tools and applications that solve real developer and consumer problems.
         </p>
       </div>
@@ -22,9 +22,10 @@ import BaseButton from '@/components/ui/BaseButton.vue'
     <section class="products-list-section">
       <div class="container">
         <div class="products-container">
-          <div 
-            v-for="product in productsData" 
+          <div
+            v-for="product in productsData"
             :key="product.id"
+            :id="product.id"
             class="product-row"
           >
             <BaseCard class="row-card" padding="lg">
@@ -100,8 +101,33 @@ import BaseButton from '@/components/ui/BaseButton.vue'
                   </div>
 
                   <div class="row-action">
-                    <BaseButton v-if="product.status === 'Active'" :to="product.linkUrl" variant="primary">
-                      Open Application
+                    <a
+                      v-if="product.status === 'Active' && product.googlePlayUrl"
+                      :href="product.googlePlayUrl"
+                      target="_blank"
+                      rel="noopener"
+                      class="google-play-badge"
+                    >
+                      <img
+                        src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        :alt="`Get ${product.title} on Google Play`"
+                      />
+                    </a>
+                    <ms-store-badge
+                      v-else-if="product.status === 'Active' && product.msStoreProductId"
+                      class="store-badge"
+                      :productid="product.msStoreProductId"
+                      :productname="product.title"
+                      window-mode="full"
+                      theme="light"
+                      animation="on"
+                    ></ms-store-badge>
+                    <BaseButton
+                      v-else-if="product.status === 'Active'"
+                      :href="product.linkUrl"
+                      variant="primary"
+                    >
+                      {{ product.linkText ?? 'Open Application' }}
                     </BaseButton>
                     <BaseButton v-else to="/contact" variant="secondary">
                       Get Notified
@@ -143,6 +169,8 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   font-size: var(--font-size-lg);
   color: var(--color-text-muted);
   max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .products-list-section {
@@ -195,6 +223,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 
 .row-info {
   flex-grow: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -255,6 +284,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 
 .screenshots-strip {
   display: flex;
+  width: 100%;
   gap: var(--space-md);
   overflow-x: auto;
   padding-bottom: var(--space-sm);
@@ -276,6 +306,30 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   align-items: center;
   gap: var(--space-lg);
   flex-wrap: wrap;
+}
+
+.store-badge {
+  display: inline-block;
+  height: 48px;
+}
+
+.store-badge::part(img) {
+  height: 48px;
+  width: auto;
+}
+
+.google-play-badge {
+  /* Google's official badge PNG ships with ~16% baked-in clear-space padding on
+     each side, so the container is scaled up to make the visible pill match
+     the Microsoft Store badge's rendered height, not just the image's. */
+  display: inline-flex;
+  height: 72px;
+  margin: -12px 0;
+}
+
+.google-play-badge img {
+  height: 100%;
+  width: auto;
 }
 
 .privacy-policy-link {

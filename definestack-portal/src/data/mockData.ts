@@ -23,16 +23,6 @@ export const featuresData: Feature[] = [
 
 export const productsData: Product[] = [
   {
-    id: 'stickydo',
-    title: 'StickyDo',
-    description: 'Smart sticky notes with local sync, reminders, categories and rich text support.',
-    category: 'Mobile App',
-    iconType: 'stickynotes',
-    status: 'Active',
-    linkText: 'Learn More',
-    linkUrl: '#'
-  },
-  {
     id: 'warranty-store',
     title: 'Warranty Store',
     description:
@@ -52,8 +42,28 @@ export const productsData: Product[] = [
       '/warranty-store/screenshot-04-settings.png',
       '/warranty-store/screenshot-05-home-dark.png'
     ],
-    status: 'Coming Soon',
+    status: 'Active',
+    googlePlayUrl: 'https://play.google.com/store/apps/details?id=in.definestack.warrantystore&hl=en',
     privacyPolicyUrl: '/apps/warrantystore/privacypolicy'
+  },
+  {
+    id: 'stickydo',
+    title: 'StickyDo',
+    description:
+      'Smart sticky notes to capture ideas, manage to-dos, and keep reminders right at your fingertips.',
+    category: 'Desktop App',
+    iconType: 'stickynotes',
+    iconImage: '/stickydo/app-icon.png',
+    screenshots: [
+      '/stickydo/screenshot-01-hero.png',
+      '/stickydo/screenshot-02-todos.png',
+      '/stickydo/screenshot-03-notes.png',
+      '/stickydo/screenshot-04-floating-note.png',
+      '/stickydo/screenshot-05-settings.png'
+    ],
+    status: 'Active',
+    linkUrl: 'https://apps.microsoft.com/detail/9nzgmrpj9fj2?hl=en-US&gl=IN',
+    msStoreProductId: '9nzgmrpj9fj2'
   }
 ]
 
