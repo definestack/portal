@@ -12,7 +12,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
       <div class="container text-center">
         <span class="section-tag">Our Products</span>
         <h1 class="page-title">Thoughtfully built software</h1>
-        <p class="page-desc centered">
+        <p class="page-desc">
           We design, develop and maintain tools and applications that solve real developer and consumer problems.
         </p>
       </div>
@@ -169,6 +169,8 @@ import BaseButton from '@/components/ui/BaseButton.vue'
   font-size: var(--font-size-lg);
   color: var(--color-text-muted);
   max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .products-list-section {
@@ -221,6 +223,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 
 .row-info {
   flex-grow: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -281,6 +284,7 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 
 .screenshots-strip {
   display: flex;
+  width: 100%;
   gap: var(--space-md);
   overflow-x: auto;
   padding-bottom: var(--space-sm);
@@ -315,8 +319,12 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 }
 
 .google-play-badge {
+  /* Google's official badge PNG ships with ~16% baked-in clear-space padding on
+     each side, so the container is scaled up to make the visible pill match
+     the Microsoft Store badge's rendered height, not just the image's. */
   display: inline-flex;
-  height: 48px;
+  height: 72px;
+  margin: -12px 0;
 }
 
 .google-play-badge img {
